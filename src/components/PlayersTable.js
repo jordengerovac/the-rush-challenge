@@ -74,8 +74,18 @@ export const PlayersTable = () => {
         <div style={{
             display: 'block', width: 800, paddingLeft: 30
         }}>
-            <CSVLink data={getData()}>Download me</CSVLink>
-            <input type="text" placeholder="Search.." onChange={handleSearch} value={searchText} />
+            <div style={{display:'flex', justifyContent: 'space-between'}}>
+                <div>
+                    <button className='export-btn'>
+                        <CSVLink data={getData()}>
+                            Export
+                        </CSVLink>
+                    </button>
+                </div>
+                <div>
+                    <input className='search-bar' type="text" placeholder="Search.." onChange={handleSearch} value={searchText} />
+                </div>
+            </div>
             <Table
                 height={500}
                 data={getData()}

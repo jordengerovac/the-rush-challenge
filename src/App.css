@@ -1,0 +1,17 @@
+@import '~rsuite/dist/rsuite.min.css';
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.export-btn {
+    width: 100px;
+    height: 30px;
+    margin: 10px 0px 10px 0px;
+}
+
+.search-bar {
+    width: 200px;
+    margin: 10px 0px 10px 0px;
+    padding: 5px;
+}
