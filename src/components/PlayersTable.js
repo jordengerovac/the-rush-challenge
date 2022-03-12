@@ -21,6 +21,9 @@ export const PlayersTable = () => {
     const getData = () => {
         let filteredData = rushing;
         if (searchText != '') {
+            if (page != 1) {
+                setPage(1);
+            }
             filteredData = filteredData.filter((player) => {
                 return player.Player.includes(searchText);
             })
