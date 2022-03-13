@@ -86,10 +86,9 @@ export const PlayersTableDashboard = () => {
     }
 
     return (
-        <div style={{
-            display: 'block', width: 800, paddingLeft: 30
-        }}>
-            <div style={{display:'flex', justifyContent: 'space-between'}}>
+        <div className='players-table-dashboard'>
+            <h1>The Rush Challenge</h1>
+            <div className='players-table-header'>
                 <ExportButton data={getExportData(rushing)}/>
                 <SearchBar searchText={searchText} handleSearch={handleSearch} />
             </div>

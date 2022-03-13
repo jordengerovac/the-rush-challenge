@@ -2,7 +2,7 @@ import { Pagination } from 'rsuite';
 
 export const PaginationBar = ({limit, page, setPage, handleChangeLimit, data}) => {
     return (
-        <div style={{ padding: 20 }}>
+        <div className='pagination-bar'>
             <Pagination
                 prev
                 next
