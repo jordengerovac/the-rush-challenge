@@ -49,6 +49,14 @@ export const PlayersTableDashboard = () => {
         return filteredData;
     }
 
+    const getExportData = (filteredData) => {
+        if (searchText !== '') {
+            filteredData = getQueriedData(filteredData);
+        }
+        filteredData = getSortedData(filteredData);
+        return filteredData;
+    }
+
     const getPaginatedData = (filteredData) => {
         return filteredData.filter((v, i) => {
             const start = limit * (page - 1);
@@ -59,12 +67,7 @@ export const PlayersTableDashboard = () => {
 
     const getFilteredData = () => {
         let filteredData = rushing;
-        if (searchText !== '') {
-            filteredData = getQueriedData(filteredData);
-        }
-        else {
-            filteredData = getSortedData(filteredData);
-        }
+        filteredData = getExportData(filteredData);
         return getPaginatedData(filteredData);
     };
 
@@ -87,7 +90,7 @@ export const PlayersTableDashboard = () => {
             display: 'block', width: 800, paddingLeft: 30
         }}>
             <div style={{display:'flex', justifyContent: 'space-between'}}>
-                <ExportButton data={getSortedData(rushing)}/>
+                <ExportButton data={getExportData(rushing)}/>
                 <SearchBar searchText={searchText} handleSearch={handleSearch} />
             </div>
             <PlayersTable 
@@ -102,7 +105,7 @@ export const PlayersTableDashboard = () => {
                 page={page} 
                 setPage={setPage} 
                 handleChangeLimit={handleChangeLimit} 
-                rushing={rushing} 
+                data={rushing} 
             />
         </div>
     );

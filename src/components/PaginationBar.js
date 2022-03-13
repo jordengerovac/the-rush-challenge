@@ -1,6 +1,6 @@
 import { Pagination } from 'rsuite';
 
-export const PaginationBar = ({limit, page, setPage, handleChangeLimit, rushing}) => {
+export const PaginationBar = ({limit, page, setPage, handleChangeLimit, data}) => {
     return (
         <div style={{ padding: 20 }}>
             <Pagination
@@ -13,7 +13,7 @@ export const PaginationBar = ({limit, page, setPage, handleChangeLimit, rushing}
                 maxButtons={5}
                 size="xs"
                 layout={['total', '-', 'limit', '|', 'pager', 'skip']}
-                total={rushing.length}
+                total={data.length}
                 limitOptions={[10, 20]}
                 limit={limit}
                 activePage={page}
