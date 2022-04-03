@@ -1,3 +1,4 @@
+import React from 'react';
 import { Pagination } from 'rsuite';
 
 export const PaginationBar = ({limit, page, setPage, handleChangeLimit, data}) => {

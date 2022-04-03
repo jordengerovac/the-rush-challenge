@@ -11,6 +11,10 @@ const app = express();
 
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'development') {
+    app.unsubscribe(morgan('dev'));
+}
+
 app.use('/api/v1/playerstats', playerstats);
 
 const PORT = process.env.PORT || 5000

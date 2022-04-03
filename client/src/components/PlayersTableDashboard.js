@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { rushing } from '../data/rushing';
+import React, { useState, useContext, useEffect } from 'react';
 import { ExportButton } from './ExportButton';
 import { SearchBar } from './SearchBar';
 import { PaginationBar } from './PaginationBar';
 import { PlayersTable } from './PlayersTable';
 import { UploadButton } from './UploadButton';
+import { GlobalContext } from '../context/GlobalState';
 
 export const PlayersTableDashboard = () => {
     const [sortColumn, setSortColumn] = useState();
@@ -13,6 +13,12 @@ export const PlayersTableDashboard = () => {
     const [searchText, setSearchText] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+
+    const { playerStats, getPlayerStats } = useContext(GlobalContext);
+
+    useEffect(() => {
+        getPlayerStats();
+    }, [])
 
     const handleChangeLimit = (dataKey) => {
         setPage(1);
@@ -45,7 +51,7 @@ export const PlayersTableDashboard = () => {
 
     const getQueriedData = (filteredData) => {
         filteredData = filteredData.filter((player) => {
-            return player.Player.includes(searchText);
+            return player['player'].includes(searchText);
         })
         return filteredData;
     }
@@ -67,7 +73,7 @@ export const PlayersTableDashboard = () => {
     }
 
     const getFilteredData = () => {
-        let filteredData = rushing;
+        let filteredData = playerStats;
         filteredData = getExportData(filteredData);
         return getPaginatedData(filteredData);
     };
@@ -91,7 +97,7 @@ export const PlayersTableDashboard = () => {
             <h1>The Rush Challenge</h1>
             <div className='players-table-header'>
                 <div className='button-group-header'>
-                    <ExportButton data={getExportData(rushing)}/>
+                    <ExportButton data={getExportData(playerStats)}/>
                     <UploadButton />
                 </div>
                 <SearchBar searchText={searchText} handleSearch={handleSearch} />
@@ -108,7 +114,7 @@ export const PlayersTableDashboard = () => {
                 page={page} 
                 setPage={setPage} 
                 handleChangeLimit={handleChangeLimit} 
-                data={rushing} 
+                data={playerStats} 
             />
         </div>
     );

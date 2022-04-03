@@ -39,7 +39,7 @@ exports.uploadPlayerStats = async (req, res, next) => {
             playerStats.push(playerStat);
         }
 
-        playerStats = await PlayerStat.create(playerStats, opts);
+        await PlayerStat.create(playerStats, opts);
 
         await session.commitTransaction();
         session.endSession();
