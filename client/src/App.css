@@ -1,0 +1,71 @@
+@import '~rsuite/dist/rsuite.min.css';
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.players-table-dashboard {
+    display: block;
+    width: 800px;
+    padding-left: 30px;
+    margin: auto;
+}
+
+.players-table-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group-header {
+    display: flex;
+}
+
+.button-group-header > div > button, label {
+    margin: 10px 5px;
+    color: #34C3FF;
+}
+
+.button-group-header > div {
+    margin: auto;
+}
+
+.export-btn {
+    width: 100px;
+    height: 30px;
+    margin: 10px 0px 10px 0px;
+    background-color: #191D24;
+}
+
+.upload-btn-label {
+    width: 100px;
+    height: 30px;
+    margin: 10px 0px 10px 0px;
+    background-color: #191D24;
+    padding: 7px 20px;
+}
+
+.upload-btn-label:hover {
+    cursor: pointer;
+    background-color: #232529;
+}
+
+.export-btn > a {
+    text-decoration: none;
+}
+
+.export-btn:hover {
+    cursor: pointer;
+    background-color: #232529;
+}
+
+.search-bar {
+    width: 200px;
+    margin: 10px 0px 10px 0px;
+    padding: 5px;
+    background-color: #191D24;
+    border: none;
+}
+
+.pagination-bar {
+    padding: 20px;
+}
