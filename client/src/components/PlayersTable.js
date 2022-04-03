@@ -1,12 +1,6 @@
-import { useContext } from 'react';
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { GlobalContext } from '../context/GlobalState';
 
 export const PlayersTable = ({getFilteredData, sortColumn, sortType, handleSortColumn, loading}) => {
-    const { playerStats } = useContext(GlobalContext);
-
-    console.log(playerStats);
-
     return (
         <div>
             <Table

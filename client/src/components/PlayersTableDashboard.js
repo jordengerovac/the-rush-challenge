@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { rushing } from '../data/rushing';
 import { ExportButton } from './ExportButton';
 import { SearchBar } from './SearchBar';
 import { PaginationBar } from './PaginationBar';
 import { PlayersTable } from './PlayersTable';
 import { UploadButton } from './UploadButton';
+import { GlobalContext } from '../context/GlobalState';
 
 export const PlayersTableDashboard = () => {
     const [sortColumn, setSortColumn] = useState();
@@ -13,6 +14,14 @@ export const PlayersTableDashboard = () => {
     const [searchText, setSearchText] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
+
+    const { playerStats, getPlayerStats } = useContext(GlobalContext);
+
+    useEffect(() => {
+        getPlayerStats();
+    }, [])
+
+    console.log(playerStats);
 
     const handleChangeLimit = (dataKey) => {
         setPage(1);

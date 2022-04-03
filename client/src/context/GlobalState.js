@@ -1,42 +1,13 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer'
+import axios from 'axios';
+import { acceptsEncodings } from 'express/lib/request';
 
 // Initial state
 const initialState = {
-    playerStats: [{
-        "Player":"Joe Banyard",
-        "Team":"JAX",
-        "Pos":"RB",
-        "Att":2,
-        "Att/G":2,
-        "Yds":7,
-        "Avg":3.5,
-        "Yds/G":7,
-        "TD":0,
-        "Lng":"7",
-        "1st":0,
-        "1st%":0,
-        "20+":0,
-        "40+":0,
-        "FUM":0
-    },
-    {
-        "Player":"Shaun Hill",
-        "Team":"MIN",
-        "Pos":"QB",
-        "Att":5,
-        "Att/G":1.7,
-        "Yds":5,
-        "Avg":1,
-        "Yds/G":1.7,
-        "TD":0,
-        "Lng":"9",
-        "1st":0,
-        "1st%":0,
-        "20+":0,
-        "40+":0,
-        "FUM":0
-    }]
+    playerStats: [],
+    error: null,
+    loading: true
 }
 
 // Create context
@@ -47,38 +18,51 @@ export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     // Actions
-    function uploadPlayerStats(playerStats) {
-        dispatch({
-            type: 'UPLOAD_PLAYERSTATS',
-            payload: playerStats
-        });
+    async function getPlayerStats() {
+        try {
+            const res = await axios.get('/api/v1/playerstats')
+
+            dispatch({
+                type: 'GET_PLAYERSTATS',
+                payload: res.data.data
+            });
+        } catch (err) {
+            dispatch({
+                type: 'PLAYERSTATS_ERROR',
+                payload: err.response.data.error
+            });
+        }
     }
 
-    //  async function addTransaction(transaction) {
-    //     const config = {
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }
+    function uploadPlayerStats(playerStats) {
+        console.log();
+        // const config =  {
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // };
 
-    //     try {
-    //         const res = await axios.post('https://mern-expense-tracker-server.herokuapp.com/api/v1/transactions', transaction, config);
+        // try {
+        //     const res = await axios.post('/api/v1/playerstats/upload', playerStats, config);
 
-    //         dispatch({
-    //             type: 'ADD_TRANSACTION',
-    //             payload: res.data.data
-    //         });
-    //     } catch (error) {
-    //         dispatch({
-    //             type: 'TRANSACTION_ERROR',
-    //             payload: error.response.data.error
-    //         });
-    //     }
-    // }
+        //     dispatch({
+        //         type: 'UPLOAD_PLAYERSTATS',
+        //         payload: res.data.data
+        //     });
+        // } catch (err) {
+        //     dispatch({
+        //         type: 'PLAYERSTATS_ERROR',
+        //         payload: err.response.data.error
+        //     });
+        // }
+    }
 
     return (
         <GlobalContext.Provider value={{
             playerStats: state.playerStats,
+            error: state.error,
+            loading: state.loading,
+            getPlayerStats,
             uploadPlayerStats
         }}>
             {children}
