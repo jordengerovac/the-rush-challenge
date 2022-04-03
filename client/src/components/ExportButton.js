@@ -1,13 +1,14 @@
+import React from 'react';
 import { CSVLink } from 'react-csv';
 
 export const ExportButton = ({data}) => {
     return (
         <div>
-            <button className='export-btn'>
-                <CSVLink data={data}>
+            <CSVLink data={data}>
+                <button className='export-btn'>
                     Export
-                </CSVLink>
-            </button>
+                </button>
+            </CSVLink>
         </div>
     )
 }

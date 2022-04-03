@@ -44,9 +44,8 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 ### Installation and running this solution
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `node version 16.14.2`
+### `npm version 8.5.0`
 
 ## Available Scripts
 

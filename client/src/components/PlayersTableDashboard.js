@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { rushing } from '../data/rushing';
 import { ExportButton } from './ExportButton';
 import { SearchBar } from './SearchBar';
 import { PaginationBar } from './PaginationBar';
@@ -20,8 +19,6 @@ export const PlayersTableDashboard = () => {
     useEffect(() => {
         getPlayerStats();
     }, [])
-
-    console.log(playerStats);
 
     const handleChangeLimit = (dataKey) => {
         setPage(1);
@@ -54,7 +51,7 @@ export const PlayersTableDashboard = () => {
 
     const getQueriedData = (filteredData) => {
         filteredData = filteredData.filter((player) => {
-            return player.Player.includes(searchText);
+            return player['player'].includes(searchText);
         })
         return filteredData;
     }
@@ -76,7 +73,7 @@ export const PlayersTableDashboard = () => {
     }
 
     const getFilteredData = () => {
-        let filteredData = rushing;
+        let filteredData = playerStats;
         filteredData = getExportData(filteredData);
         return getPaginatedData(filteredData);
     };
@@ -100,7 +97,7 @@ export const PlayersTableDashboard = () => {
             <h1>The Rush Challenge</h1>
             <div className='players-table-header'>
                 <div className='button-group-header'>
-                    <ExportButton data={getExportData(rushing)}/>
+                    <ExportButton data={getExportData(playerStats)}/>
                     <UploadButton />
                 </div>
                 <SearchBar searchText={searchText} handleSearch={handleSearch} />
@@ -117,7 +114,7 @@ export const PlayersTableDashboard = () => {
                 page={page} 
                 setPage={setPage} 
                 handleChangeLimit={handleChangeLimit} 
-                data={rushing} 
+                data={playerStats} 
             />
         </div>
     );

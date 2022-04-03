@@ -39,14 +39,26 @@ html {
 .upload-btn-label {
     width: 100px;
     height: 30px;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 10px;
     background-color: #191D24;
     padding: 7px 20px;
+    text-align: center;
 }
 
 .upload-btn-label:hover {
     cursor: pointer;
     background-color: #232529;
+}
+
+.upload-btn-label-disabled {
+    color: #000000;
+    width: 120px;
+    height: 30px;
+    margin: 10px 0px 10px 10px;
+    background-color: #70757f;
+    padding: 7px 20px;
+    opacity: 75%;
+    text-align: center;
 }
 
 .export-btn > a {
@@ -68,4 +80,9 @@ html {
 
 .pagination-bar {
     padding: 20px;
+}
+
+.clip-loader{
+    padding-top: 15px;
+    padding-left: 15px;
 }

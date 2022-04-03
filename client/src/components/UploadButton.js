@@ -1,46 +1,41 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../context/GlobalState';
+import { parseJson } from '../utils/jsonUtil';
+import ClipLoader from 'react-spinners/ClipLoader'
 
 export const UploadButton = () => {
-    const [file, setFile] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { uploadPlayerStats } = useContext(GlobalContext);
 
     const handleChange = (e) => {
-        e.preventDefault();
         const fileReader = new FileReader();
         fileReader.readAsText(e.target.files[0], "UTF-8");
-        fileReader.onload = e => {
-            console.log("e.target.result", e.target.result);
-            setFile(e.target.result);
+
+        fileReader.onload = (e) => {
+            let parsedFile = parseJson(e.target.result);
+            waitForUploadedPlayerStats(parsedFile);
         };
+    }
 
-        // TODO: here we parse the json
-        const newPlayerStat = {
-            "Player":"Joe Banyard 2",
-            "Team":"JAX",
-            "Pos":"RB",
-            "Att":2,
-            "Att/G":2,
-            "Yds":7,
-            "Avg":3.5,
-            "Yds/G":7,
-            "TD":0,
-            "Lng":"7",
-            "1st":0,
-            "1st%":0,
-            "20+":0,
-            "40+":0,
-            "FUM":0
-        }
-
-        uploadPlayerStats(newPlayerStat);
+    async function waitForUploadedPlayerStats(parsedFile) {
+        setLoading(true);
+        await uploadPlayerStats(parsedFile);
+        setLoading(false);
     }
 
     return (
         <div>
-            <input id='file' type='file' onChange={handleChange} hidden />
-            <label className='upload-btn-label' for='file'>Upload</label>
+            <div style={{display: 'flex'}}>
+            <input id='file' type='file' onChange={handleChange} hidden disabled={loading ? true : false} />
+                <label className={loading ? 'upload-btn-label-disabled' : 'upload-btn-label'} for='file'>{loading ? 'Uploading...' : 'Upload'}</label>
+                {loading ? 
+                    <div className="clip-loader">
+                        <ClipLoader color='#34C3FF' size={20} /> 
+                    </div>
+                    : null
+                }
+            </div>
         </div>
     )
 }

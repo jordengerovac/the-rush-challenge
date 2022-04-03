@@ -9,7 +9,8 @@ export default (state, action) => {
         case 'UPLOAD_PLAYERSTATS':
             return {
                 ...state,
-                playerStats: [...state.playerStats, action.payload]
+                loading: false,
+                playerStats: action.payload
             }
         case 'PLAYERSTATSERROR':
             return {

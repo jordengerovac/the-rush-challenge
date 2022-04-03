@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer'
 import axios from 'axios';
-import { acceptsEncodings } from 'express/lib/request';
 
 // Initial state
 const initialState = {
@@ -34,27 +33,26 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    function uploadPlayerStats(playerStats) {
-        console.log();
-        // const config =  {
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
+    async function uploadPlayerStats(playerStats) {
+        const config =  {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
 
-        // try {
-        //     const res = await axios.post('/api/v1/playerstats/upload', playerStats, config);
+        try {
+            const res = await axios.post('/api/v1/playerstats/upload', playerStats, config);
 
-        //     dispatch({
-        //         type: 'UPLOAD_PLAYERSTATS',
-        //         payload: res.data.data
-        //     });
-        // } catch (err) {
-        //     dispatch({
-        //         type: 'PLAYERSTATS_ERROR',
-        //         payload: err.response.data.error
-        //     });
-        // }
+            dispatch({
+                type: 'UPLOAD_PLAYERSTATS',
+                payload: res.data.data
+            });
+        } catch (err) {
+            dispatch({
+                type: 'PLAYERSTATS_ERROR',
+                payload: err.response.data.error
+            });
+        }
     }
 
     return (

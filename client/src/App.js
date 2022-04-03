@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { CustomProvider } from 'rsuite';
 import { PlayersTableDashboard } from './components/PlayersTableDashboard';

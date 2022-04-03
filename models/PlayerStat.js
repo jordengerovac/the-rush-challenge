@@ -25,8 +25,9 @@ const PlayerStatSchema = new mongoose.Schema({
         required: [true, 'Please add a positive or negative number']
     },
     yds: {
-        type: Number,
-        required: [true, 'Please add a positive or negative number']
+        type: String,
+        trim: true,
+        required: [true, 'Please add some text']
     },
     avg: {
         type: Number,

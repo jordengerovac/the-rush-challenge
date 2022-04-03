@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 
 export const PlayersTable = ({getFilteredData, sortColumn, sortType, handleSortColumn, loading}) => {
@@ -14,63 +16,63 @@ export const PlayersTable = ({getFilteredData, sortColumn, sortType, handleSortC
             >
                 <Column width={200} align="center" fixed>
                     <HeaderCell>Player</HeaderCell>
-                    <Cell dataKey="Player" />
+                    <Cell dataKey="player" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Team</HeaderCell>
-                    <Cell dataKey="Team" />
+                    <Cell dataKey="team" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Pos</HeaderCell>
-                    <Cell dataKey="Pos" />
+                    <Cell dataKey="pos" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Att</HeaderCell>
-                    <Cell dataKey="Att" />
+                    <Cell dataKey="att" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Att/G</HeaderCell>
-                    <Cell dataKey="Att/G" />
+                    <Cell dataKey="attG" />
                 </Column>
                 <Column width={75} sortable>
                     <HeaderCell>Yds</HeaderCell>
-                    <Cell dataKey="Yds" />
+                    <Cell dataKey="yds" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Avg</HeaderCell>
-                    <Cell dataKey="Avg" />
+                    <Cell dataKey="avg" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>Yds/G</HeaderCell>
-                    <Cell dataKey="Yds/G" />
+                    <Cell dataKey="ydsG" />
                 </Column>
                 <Column width={75} sortable>
                     <HeaderCell>TD</HeaderCell>
-                    <Cell dataKey="TD" />
+                    <Cell dataKey="td" />
                 </Column>
                 <Column width={75} sortable>
                     <HeaderCell>Lng</HeaderCell>
-                    <Cell dataKey="Lng" />
+                    <Cell dataKey="lng" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>1st</HeaderCell>
-                    <Cell dataKey="1st" />
+                    <Cell dataKey="firstDowns" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>1st%</HeaderCell>
-                    <Cell dataKey="1st%" />
+                    <Cell dataKey="firstDownsPercentage" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>20+</HeaderCell>
-                    <Cell dataKey="20+" />
+                    <Cell dataKey="twentyPlus" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>40+</HeaderCell>
-                    <Cell dataKey="40+" />
+                    <Cell dataKey="fortyPlus" />
                 </Column>
                 <Column width={75}>
                     <HeaderCell>FUM</HeaderCell>
-                    <Cell dataKey="FUM" />
+                    <Cell dataKey="fum" />
                 </Column>
             </Table>
         </div>
