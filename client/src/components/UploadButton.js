@@ -5,29 +5,47 @@ import ClipLoader from 'react-spinners/ClipLoader'
 
 export const UploadButton = () => {
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const { uploadPlayerStats } = useContext(GlobalContext);
 
     const handleChange = (e) => {
-        const fileReader = new FileReader();
-        fileReader.readAsText(e.target.files[0], "UTF-8");
+        if (e.target.files[0].type !== 'application/json') {
+            setErrorMessage('File must be a json file')
+        }
+        else {
+                const fileReader = new FileReader();
+                fileReader.readAsText(e.target.files[0], "UTF-8");
 
-        fileReader.onload = (e) => {
-            let parsedFile = parseJson(e.target.result);
-            waitForUploadedPlayerStats(parsedFile);
-        };
+                fileReader.onload = (e) => {
+                    let parsedFile = {};
+                    try {
+                        parsedFile = parseJson(e.target.result);
+                    } catch(err) {
+                        setErrorMessage('An error occurred while processing the file')
+                    }
+                    if (Object.keys(parsedFile).length !== 0) {
+                        waitForUploadedPlayerStats(parsedFile);
+                    }
+                };
+        }
     }
 
     async function waitForUploadedPlayerStats(parsedFile) {
         setLoading(true);
-        await uploadPlayerStats(parsedFile);
+        setErrorMessage('');
+        try {
+            await uploadPlayerStats(parsedFile);
+        } catch(err) {
+            setErrorMessage('An error occurred while uploading the file')
+        }
         setLoading(false);
     }
 
     return (
         <div>
             <div style={{display: 'flex'}}>
-            <input id='file' type='file' onChange={handleChange} hidden disabled={loading ? true : false} />
+                <input id='file' type='file' onChange={handleChange} hidden disabled={loading ? true : false} />
                 <label className={loading ? 'upload-btn-label-disabled' : 'upload-btn-label'} for='file'>{loading ? 'Uploading...' : 'Upload'}</label>
                 {loading ? 
                     <div className="clip-loader">
@@ -35,6 +53,7 @@ export const UploadButton = () => {
                     </div>
                     : null
                 }
+                {errorMessage !== '' ? <p className='error-message'>{errorMessage}</p> : null}
             </div>
         </div>
     )

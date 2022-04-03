@@ -5,6 +5,7 @@ import { PaginationBar } from './PaginationBar';
 import { PlayersTable } from './PlayersTable';
 import { UploadButton } from './UploadButton';
 import { GlobalContext } from '../context/GlobalState';
+import { returnPaginatedData, returnQueriedData, returnSortedData } from '../utils/dataUtil';
 
 export const PlayersTableDashboard = () => {
     const [sortColumn, setSortColumn] = useState();
@@ -26,34 +27,11 @@ export const PlayersTableDashboard = () => {
     };
 
     const getSortedData = (filteredData) => {
-        if (sortColumn && sortType) {
-            filteredData = filteredData.sort((a, b) => {
-                let x = a[sortColumn];
-                let y = b[sortColumn];
-                
-                if (typeof x === 'string') {
-                    x = parseInt(x.replace(/,/g, ''), 10);
-                }
-                if (typeof y === 'string') {
-                    y = parseInt(y.replace(/,/g, ''), 10);
-                }
-
-                if (sortType === 'asc') {
-                    return x - y;
-                } 
-                else {
-                    return y - x;
-                }
-            });
-        }
-        return filteredData;
+        return returnSortedData(filteredData, sortColumn, sortType);
     }
 
     const getQueriedData = (filteredData) => {
-        filteredData = filteredData.filter((player) => {
-            return player['player'].includes(searchText);
-        })
-        return filteredData;
+        return returnQueriedData(filteredData, searchText);
     }
 
     const getExportData = (filteredData) => {
@@ -65,11 +43,7 @@ export const PlayersTableDashboard = () => {
     }
 
     const getPaginatedData = (filteredData) => {
-        return filteredData.filter((v, i) => {
-            const start = limit * (page - 1);
-            const end = start + limit;
-            return i >= start && i < end;
-        });
+        return returnPaginatedData(filteredData, limit, page);
     }
 
     const getFilteredData = () => {

@@ -30,6 +30,7 @@ export const GlobalProvider = ({ children }) => {
                 type: 'PLAYERSTATS_ERROR',
                 payload: err.response.data.error
             });
+            throw err;
         }
     }
 
@@ -52,6 +53,7 @@ export const GlobalProvider = ({ children }) => {
                 type: 'PLAYERSTATS_ERROR',
                 payload: err.response.data.error
             });
+            throw err;
         }
     }
 
