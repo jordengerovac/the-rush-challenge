@@ -47,15 +47,15 @@ If you have any questions regarding requirements, do not hesitate to email your 
 ### `node version 16.14.2`
 ### `npm version 8.5.0`
 
-## Available Scripts
 
-In the project directory, you can run:
+### Setup
 
 ### `npm install`
 ### `cd client/`
 ### `npm install`
 ### `cd ..`
 
+# Run front and backend
 ### `npm run dev`
 
 Runs the app in the development mode.\
