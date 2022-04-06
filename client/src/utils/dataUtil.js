@@ -1,6 +1,6 @@
 export const returnQueriedData = (filteredData, query) => {
     filteredData = filteredData.filter((player) => {
-        return player['player'].includes(query);
+        return player['player'].toLowerCase().includes(query.toLowerCase());
     })
     return filteredData;
 }
