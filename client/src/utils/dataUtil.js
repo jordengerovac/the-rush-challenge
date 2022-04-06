@@ -1,6 +1,6 @@
-export const returnQueriedData = (filteredData, searchText) => {
+export const returnQueriedData = (filteredData, query) => {
     filteredData = filteredData.filter((player) => {
-        return player['player'].includes(searchText);
+        return player['player'].includes(query);
     })
     return filteredData;
 }
