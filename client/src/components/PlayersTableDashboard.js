@@ -11,7 +11,8 @@ export const PlayersTableDashboard = () => {
     const [sortColumn, setSortColumn] = useState();
     const [sortType, setSortType] = useState();
     const [loading, setLoading] = useState(false);
-    const [searchText, setSearchText] = useState('');
+    const [searchBarText, setSearchBarText] = useState('');
+    const [query, setQuery] = useState('');
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
 
@@ -20,6 +21,14 @@ export const PlayersTableDashboard = () => {
     useEffect(() => {
         getPlayerStats();
     }, [])
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setPage(1);
+            setQuery(searchBarText)
+        }, 400);
+        return () => clearTimeout(timeoutId);
+      }, [searchBarText]);
 
     const handleChangeLimit = (dataKey) => {
         setPage(1);
@@ -31,11 +40,11 @@ export const PlayersTableDashboard = () => {
     }
 
     const getQueriedData = (filteredData) => {
-        return returnQueriedData(filteredData, searchText);
+        return returnQueriedData(filteredData, query);
     }
 
     const getExportData = (filteredData) => {
-        if (searchText !== '') {
+        if (query !== '') {
             filteredData = getQueriedData(filteredData);
         }
         filteredData = getSortedData(filteredData);
@@ -62,8 +71,7 @@ export const PlayersTableDashboard = () => {
     };
 
     const handleSearch = (e) => {
-        setPage(1);
-        setSearchText(e.target.value);
+        setSearchBarText(e.target.value);
     }
 
     return (
@@ -74,7 +82,7 @@ export const PlayersTableDashboard = () => {
                     <ExportButton data={getExportData(playerStats)}/>
                     <UploadButton />
                 </div>
-                <SearchBar searchText={searchText} handleSearch={handleSearch} />
+                <SearchBar searchBarText={searchBarText} handleSearch={handleSearch} />
             </div>
             <PlayersTable 
                 getFilteredData={getFilteredData} 
