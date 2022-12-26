@@ -45,12 +45,12 @@ If you have any questions regarding requirements, do not hesitate to email your 
 ### Endpoints and File Upload Usage
 There are two endpoint used in this app:
     1. POST http://localhost:5000/api/v1/playerstats/upload 
-       - with a raw json in the body (same format was client/src/data/rushing.js)
+       - with a raw json in the body (same format was client/src/data/rushing.json)
        - parses the json and uploads the player data into the mongodb database
     2. GET http://localhost:5000/api/v1/playerstats
        - returns all the player data
 
-The Upload button uses endopint #1 and accepts json files only.
+The Upload button uses endpoint #1 and accepts json files only.
 
 
 ### Installation and running this solution
