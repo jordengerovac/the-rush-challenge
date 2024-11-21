@@ -1,4 +1,4 @@
-# "the Rush" Challenge
+# "The Rush" Challenge
 
 ### Challenge Background
 We have sets of records representing football players' rushing statistics. All records have the following attributes:
@@ -31,16 +31,7 @@ In this repo is a sample data file [`rushing.json`](/rushing.json).
 
 3. Update the section `Installation and running this solution` in the README file explaining how to run your code
 
-### Submitting a solution
-1. Download this repo
-2. Complete the problem outlined in the `Requirements` section
-3. In your personal public GitHub repo, create a new public repo with this implementation
-4. Provide this link to your contact at theScore
-
 We will evaluate you on your ability to solve the problem defined in the requirements section as well as your choice of frameworks, and general coding style.
-
-### Help
-If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Endpoints and File Upload Usage
 There are two endpoint used in this app:
